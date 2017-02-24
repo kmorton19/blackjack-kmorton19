@@ -69,13 +69,13 @@ if (isset($_SESSION)) {
         $_SESSION['dealerCards'] = array ();
 
         switch ($_GET["action"]) {
-            case ('deal'):
+            case $_GET['deal']:
                 deal();
                 break;
-            case 'hit':
+            case $_GET['hit']:
                 hit ();
                 break;
-            case 'pass':
+            case $_GET['pass']:
                 pass ();
                 break;
             /*
@@ -92,7 +92,7 @@ function deal () {
     $_SESSION['playerCards'] = $_SESSION['deck'][0]['name'] . " and the " . $_SESSION['deck'][1]['name'];
         echo "You have been dealt the ";
         echo $_SESSION['playerCards'];
-        echo "yout total is ";
+        echo "your total is ";
         echo $_SESSION["playerValue"];
         echo "<br />";
     $_SESSION['dealerCards'] = $_SESSION['deck'][2]['name'] . " and the " . $_SESSION['deck'][3]['name'];
@@ -102,23 +102,31 @@ function deal () {
         echo " and an unknown card";
 }
 function hit () {
-    $x = 4;
-    $_SESSION['playerCards']  = $_SESSION['playerCards'] . " and " . $_SESSION['deck'][$x]['name'];
-    $_SESSION['playerValue'] = $_SESSION['playerValue'] + $_SESSION['deck'][$x]['value'];
-    $x++;
+    $_SESSION['playerCards']  = $_SESSION['playerCards'] . " and " . $_SESSION['deck']($_SESSION['position'])['name'];
+    $_SESSION['playerValue'] = $_SESSION['playerValue'] + $_SESSION['deck']($_SESSION['position'])['value'];
+    $_SESSION['position'] = ($_SESSION['position']) + 1;
     if ($_SESSION['playerValue'] > 21) {
         if (in_array("Ace", $_SESSION['player cards'], true)){
             $_SESSION['playerValue'] = $_SESSION['playerValue'] - 10;
         } else {
-
+            echo "YOU BUST";
         }
     } else {
-        echo "YOU BUST";
+
     }
 }
 function pass () {
 if ($_SESSION['dealerValue'] <= 16) {
-    $_SESSION['dealerCards'] = $_SESSION['dealerCards']
+    $_SESSION['dealerCards'] = $_SESSION['dealerCards'] . $_SESSION['deck']($_SESSION['position'])['name'];
+    $_SESSION['dealerValue'] = $_SESSION['dealerValue'] + $_SESSION['deck']($_SESSION['position'])['value'];
+    echo $_SESSION['dealerCards'];
+    echo $_SESSION['dealerValue'];
+    $_SESSION['position'] = ($_SESSION['position']) + 1;
+} else {
+    echo "The dealer had the ";
+    echo $_SESSION['dealerCards'];
+    echo "with a total of ";
+    echo $_SESSION['dealerValue'];
 }
 }
 /*

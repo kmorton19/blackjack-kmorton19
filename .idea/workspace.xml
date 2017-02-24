@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f1722ec-a633-4d4f-8068-b948c641f5e1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/player-inpur.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/player-input.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blackjack.php" afterPath="$PROJECT_DIR$/blackjack.php" />
     </list>
     <ignored path="blackjack-kmorton19.iws" />
@@ -29,8 +26,8 @@
       <file leaf-file-name="blackjack.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blackjack.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-25">
-              <caret line="104" column="6" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="6" />
+            <state relative-caret-position="1328">
+              <caret line="114" column="8" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -49,7 +46,7 @@
       <file leaf-file-name="deck.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/deck.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="772">
+            <state relative-caret-position="1947">
               <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding />
             </state>
@@ -209,12 +206,12 @@
       <option name="presentableId" value="Default" />
       <updated>1486560133580</updated>
       <workItem from="1486560134856" duration="16755000" />
-      <workItem from="1487337348465" duration="10526000" />
+      <workItem from="1487337348465" duration="12482000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27281000" />
+    <option name="totallyTimeSpent" value="29237000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="2762" height="1770" extended-state="6" />
@@ -321,7 +318,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/deck.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="772">
+        <state relative-caret-position="1947">
           <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding />
         </state>
@@ -337,8 +334,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blackjack.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-25">
-          <caret line="104" column="6" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="6" />
+        <state relative-caret-position="1328">
+          <caret line="114" column="8" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="8" />
           <folding />
         </state>
       </provider>
