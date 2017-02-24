@@ -1,11 +1,11 @@
 <?php
 session_start();
-require_once(player-input.php);
+require_once("player-inpur.php");
 if (isset($_SESSION)) {
     if (isset($_GET['new']) && $_GET['new'] == "New") {
         session_unset();
     }
-    if (!isset($_SESSION['randDeck'])) {
+    if (!isset($_SESSION['deck'])) {
         $_SESSION['deck'] = [
             ["name" => "Ace of Spades", "value" => 11],
             ["name" => "Two of Spades", "value" => 2],
@@ -60,24 +60,70 @@ if (isset($_SESSION)) {
             ["name" => "Queen of Diamonds", "value" => 10],
             ["name" => "King of Diamonds", "value" => 10]
         ];
-        $_SESSION['randDeck'] = shuffle($_SESSION['deck']);
+        $_SESSION['deck'] = shuffle($_SESSION['deck']);
         $_SESSION['pass'] = 0;
-        $_SESSION['position'] = 0;
+        $_SESSION['position'] = 4;
+        $_SESSION['playerValue'] = 0;
+        $_SESSION['playerCards'] = array ();
+        $_SESSION['dealerValue'] = 0;
+        $_SESSION['dealerCards'] = array ();
+
+        switch ($_GET["action"]) {
+            case ('deal'):
+                deal();
+                break;
+            case 'hit':
+                hit ();
+                break;
+            case 'pass':
+                pass ();
+                break;
+            /*
+            case 'reset':
+                reset ();
+                break;
+            */
+            default:
+            }
+        }
     }
-    if ($_SESSION['pass'] > 0){
-        session_unset();
+function deal () {
+    $_SESSION['playerValue'] = $_SESSION['deck'][0]['value'] + $_SESSION['deck'][1]['value'];
+    $_SESSION['playerCards'] = $_SESSION['deck'][0]['name'] . " and the " . $_SESSION['deck'][1]['name'];
+        echo "You have been dealt the ";
+        echo $_SESSION['playerCards'];
+        echo "yout total is ";
+        echo $_SESSION["playerValue"];
+        echo "<br />";
+    $_SESSION['dealerCards'] = $_SESSION['deck'][2]['name'] . " and the " . $_SESSION['deck'][3]['name'];
+    $_SESSION['dealerValue'] = $_SESSION['deck'][2]['value'] + $_SESSION['deck'][3]['value'];
+        echo "The dealer has ";
+        echo $_SESSION['deck'][2]['name'];
+        echo " and an unknown card";
+}
+function hit () {
+    $x = 4;
+    $_SESSION['playerCards']  = $_SESSION['playerCards'] . " and " . $_SESSION['deck'][$x]['name'];
+    $_SESSION['playerValue'] = $_SESSION['playerValue'] + $_SESSION['deck'][$x]['value'];
+    $x++;
+    if ($_SESSION['playerValue'] > 21) {
+        if (in_array("Ace", $_SESSION['player cards'], true)){
+            $_SESSION['playerValue'] = $_SESSION['playerValue'] - 10;
+        } else {
+
+        }
+    } else {
+        echo "YOU BUST";
     }
 }
-//for ($x = 0; $x < count($deck); $x++){
-//    var_dump (shuffle($deck[1]));
-//    echo "<br/ >";
-//}
-shuffle($_SESSION['deck']);
-$x = 0;
-echo "You have been dealt the ";
-echo $_SESSION['deck'][$x]["name"];
-echo " and the ";
-echo $_SESSION['deck'][$x+=1]["name"];
-echo "<br />";
-echo "And the value is ";
-echo $_SESSION['deck'][$x--]["value"] += ($_SESSION['deck'][$x]["value"]);
+function pass () {
+if ($_SESSION['dealerValue'] <= 16) {
+    $_SESSION['dealerCards'] = $_SESSION['dealerCards']
+}
+}
+/*
+function reset () {
+    session_unset();
+    session_start();
+}
+*/
