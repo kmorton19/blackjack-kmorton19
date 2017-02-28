@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(E_ERROR);
 require_once("player-inpur.php");
 if (isset($_SESSION)) {
     if (isset($_GET['new']) && $_GET['new'] == "reset") {
@@ -88,6 +89,9 @@ function deal() {
     $_SESSION['playerValue'] = ($_SESSION["deck"][0]["value"]) + ($_SESSION["deck"][1]["value"]);
     $_SESSION['playerCards'] = $_SESSION["deck"][0]["name"] . " and the " . $_SESSION["deck"][1]["name"];
     $pos = strpos($_SESSION['dealerCards'], "Ace");
+    if ($_SESSION['playerValue'] > 21 and $pos === true) {
+            $_SESSION['playerValue'] = $_SESSION['playerValue'] - 10;
+        }
     echo "You have been dealt the ";
     echo $_SESSION['playerCards'];
     echo " your total is ";
@@ -98,21 +102,15 @@ function deal() {
     echo "The dealer has the ";
     echo $_SESSION["deck"][2]["name"];
     echo " and an unknown card";
-    if ($_SESSION['playerValue'] > 21) {
-        if ($pos === true) {
-            $_SESSION['playerValue'] = $_SESSION['playerValue'] - 10;
-        }
-    }
 }
 function hit() {
     $pos = strpos($_SESSION['playerCards'], "Ace");
     $_SESSION['playerCards'] = $_SESSION['playerCards'] . " and " . $_SESSION["deck"][$_SESSION['position']]["name"];
     $_SESSION['playerValue'] = $_SESSION['playerValue'] + $_SESSION["deck"][$_SESSION['position']]["value"];
     $_SESSION['position'] = ($_SESSION['position']) + 1;
-    if ($_SESSION['playerValue'] > 21) {
-        if ($pos === true){
+    if ($_SESSION['playerValue'] > 21 and $pos === true){
             $_SESSION['playerValue'] = $_SESSION['playerValue'] - 10;
-        } else {
+        } elseif ($_SESSION['playerValue'] > 21) {
             echo "You have the ";
             echo $_SESSION['playerCards'];
             echo "<br />";
@@ -123,8 +121,7 @@ function hit() {
             echo "<br />";
             echo "The dealer had the ";
             echo $_SESSION['dealerCards'];
-        }
-    } else {
+        }else {
         echo "You have been dealt the ";
         echo $_SESSION['playerCards'];
         echo " your total is ";
@@ -139,12 +136,14 @@ function hit() {
 }
 function pass()
 {
-    $pos = strpos($_SESSION['dealerCards'], "Ace");
-
     if ($_SESSION['dealerValue'] <= 16) {
         $_SESSION['dealerCards'] = $_SESSION['dealerCards'] . " and the " . $_SESSION["deck"][$_SESSION['position']]["name"];
         $_SESSION['dealerValue'] = $_SESSION['dealerValue'] + $_SESSION["deck"][$_SESSION['position']]["value"];
         $_SESSION['position'] = ($_SESSION['position']) + 1;
+        $pos = strpos($_SESSION['dealerCards'], "Ace");
+        if ($_SESSION['dealerValue'] > 21 and $pos === true) {
+            $_SESSION['dealerValue'] = $_SESSION['dealerValue'] - 10;
+        }
         echo "You have been dealt the ";
         echo $_SESSION['playerCards'];
         echo " your total is ";
@@ -168,11 +167,6 @@ function pass()
         echo "<br />";
     }
     if ($_SESSION['dealerValue'] > 21) {
-        if ($pos === true) {
-            $_SESSION['dealerValue'] = $_SESSION['dealerValue'] - 10;
-        }
-    }
-    if ($_SESSION['dealerValue'] > 21) {
         echo "Player Wins!";
     } elseif ($_SESSION['playerValue'] > 21) {
         echo "Dealer Wins!";
@@ -183,5 +177,4 @@ function pass()
     } else {
         echo "Dealer Wins!";
     }
-
 }
