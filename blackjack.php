@@ -60,44 +60,46 @@ if (isset($_SESSION)) {
             ["name" => "Queen of Diamonds", "value" => 10],
             ["name" => "King of Diamonds", "value" => 10]
         ];
-        shuffle($_SESSION["deck"]);
+        $_SESSION['deck'] = array_rand($_SESSION['deck'], 52);
         $_SESSION['position'] = 4;
         $_SESSION['playerValue'] = 0;
-        $_SESSION['playerCards'] = array();
+        $_SESSION['playerCards'] = array ();
         $_SESSION['dealerValue'] = 0;
-        $_SESSION['dealerCards'] = array();
+        $_SESSION['dealerCards'] = array ();
     }
-
-        switch ($_GET["action"]) {
-            case 'deal':
-                deal();
-                break;
-            case 'hit':
-                hit ();
-                break;
-            case 'pass':
-                pass ();
-                break;
-            default:
-                break;
-            }
+    switch ($_GET["action"]) {
+        case 'deal':
+            deal();
+            break;
+        case 'hit':
+            hit ();
+            break;
+        case 'pass':
+            pass ();
+            break;
+        case 'reset':
+            session_unset();
+            break;
+        default:
+            break;
     }
+}
 function deal() {
-    $_SESSION['playerValue'] = $_SESSION["deck"][0]["value"] + $_SESSION["deck"][1]["value"];
+    $_SESSION['playerValue'] = ($_SESSION["deck"][0]["value"]) + ($_SESSION["deck"][1]["value"]);
     $_SESSION['playerCards'] = $_SESSION["deck"][0]["name"] . " and the " . $_SESSION["deck"][1]["name"];
-        echo "You have been dealt the ";
-        echo $_SESSION['playerCards'];
-        echo " your total is ";
-        echo $_SESSION["playerValue"];
-        echo "<br />";
+    echo "You have been dealt the ";
+    echo $_SESSION['playerCards'];
+    echo " your total is ";
+    echo $_SESSION["playerValue"];
+    echo "<br />";
     $_SESSION['dealerCards'] = $_SESSION["deck"][2]["name"] . " and the " . $_SESSION["deck"][3]["name"];
     $_SESSION['dealerValue'] = $_SESSION["deck"][2]["value"] + $_SESSION["deck"][3]["value"];
-        echo "The dealer has the ";
-        echo $_SESSION["deck"][2]["name"];
-        echo " and an unknown card";
+    echo "The dealer has the ";
+    echo $_SESSION["deck"][2]["name"];
+    echo " and an unknown card";
 }
 function hit() {
-    $_SESSION['playerCards']  = $_SESSION['playerCards'] . " and " . $_SESSION["deck"][$_SESSION['position']]["name"];
+    $_SESSION['playerCards'] = $_SESSION['playerCards'] . " and " . $_SESSION["deck"][$_SESSION['position']]["name"];
     $_SESSION['playerValue'] = $_SESSION['playerValue'] + $_SESSION["deck"][$_SESSION['position']]["value"];
     $_SESSION['position'] = ($_SESSION['position']) + 1;
     if ($_SESSION['playerValue'] > 21) {
@@ -120,23 +122,23 @@ function hit() {
     }
 }
 function pass() {
-if ($_SESSION['dealerValue'] <= 16) {
-    $_SESSION['dealerCards'] = $_SESSION['dealerCards'] . $_SESSION["deck"][$_SESSION['position']]["name"];
-    $_SESSION['dealerValue'] = $_SESSION['dealerValue'] + $_SESSION["deck"][$_SESSION['position']]["value"];
-    $_SESSION['position'] = ($_SESSION['position']) + 1;
-    echo "You have been dealt the ";
-    echo $_SESSION['playerCards'];
-    echo " your total is ";
-    echo $_SESSION["playerValue"];
-    echo "<br />";
-    echo "The dealer has the ";
-    echo $_SESSION['dealerCards'];
-    echo " with a value of ";
-    echo $_SESSION['dealerValue'];
-} else {
-    echo "The dealer had the ";
-    echo $_SESSION['dealerCards'];
-    echo "with a total of ";
-    echo $_SESSION['dealerValue'];
-}
+    if ($_SESSION['dealerValue'] <= 16) {
+        $_SESSION['dealerCards'] = $_SESSION['dealerCards'] . $_SESSION["deck"][$_SESSION['position']]["name"];
+        $_SESSION['dealerValue'] = $_SESSION['dealerValue'] + $_SESSION["deck"][$_SESSION['position']]["value"];
+        $_SESSION['position'] = ($_SESSION['position']) + 1;
+        echo "You have been dealt the ";
+        echo $_SESSION['playerCards'];
+        echo " your total is ";
+        echo $_SESSION["playerValue"];
+        echo "<br />";
+        echo "The dealer has the ";
+        echo $_SESSION['dealerCards'];
+        echo " with a value of ";
+        echo $_SESSION['dealerValue'];
+    } else {
+        echo "The dealer had the ";
+        echo $_SESSION['dealerCards'];
+        echo "with a total of ";
+        echo $_SESSION['dealerValue'];
+    }
 }

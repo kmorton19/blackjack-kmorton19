@@ -1,7 +1,6 @@
 <?php
-
-function createDeck () {
-    $deck = [
+function createDeck ( ) {
+    $deck  = [
         ["name" => "Ace of Spades", "value" => 11],
         ["name" => "Two of Spades", "value" => 2],
         ["name" => "Three of Spades", "value" => 3],
@@ -56,4 +55,11 @@ function createDeck () {
         ["name" => "King of Diamonds", "value" => 10]
     ];
     return $deck;
+}
+function dealCard () {
+    $card = array_pop($_SESSION['deck']);
+    return $card;
+}
+function printDeck ($deck) {
+
 }
