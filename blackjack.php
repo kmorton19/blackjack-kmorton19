@@ -147,8 +147,9 @@ function hit() {
     }
 }
 function pass() {
-    if ($_SESSION['dealerValue'] <= 16) {
+    while ($_SESSION['dealerValue'] <= 16) {
         $_SESSION['dealerCards'] = $_SESSION['dealerCards'] . " and the " . $_SESSION["deck"][$_SESSION['position']]["name"];
+        $_SESSION['position'] += 1;
         if ($_SESSION["deck"][$_SESSION['position']]["value"] > 10) {
             if ($_SESSION['dealerValue'] + $_SESSION["deck"][$_SESSION['position']]["value"] > 21) {
                 $_SESSION["deck"][$_SESSION['position']]["value"] = $_SESSION["deck"][$_SESSION['position']]["value"] - 10;
@@ -159,18 +160,7 @@ function pass() {
         } else {
             $_SESSION['dealerValue'] = $_SESSION['dealerValue'] + $_SESSION["deck"][$_SESSION['position']]["value"];
         }
-        $_SESSION['position'] = ($_SESSION['position']) + 1;
-        echo "You have been dealt the ";
-        echo $_SESSION['playerCards'];
-        echo " your total is ";
-        echo $_SESSION["playerValue"];
-        echo "<br />";
-        echo "The dealer has the ";
-        echo $_SESSION['dealerCards'];
-        echo " with a total of ";
-        echo $_SESSION['dealerValue'];
-        echo "<br />";
-    } else {
+    } if ($_SESSION['dealerValue'] > 16) {
         echo "You have the ";
         echo $_SESSION['playerCards'];
         echo " your total is ";
